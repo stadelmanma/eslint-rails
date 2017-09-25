@@ -3,7 +3,7 @@ module ESLintRails
     attr_reader :config
 
     def self.read(force_default: false)
-      self.new(force_default: force_default).send(:read)
+      new(force_default: force_default).send(:read)
     end
 
     private
@@ -23,9 +23,10 @@ module ESLintRails
 
       @force_default = force_default
       @custom_file   = find_custom_config
-      @default_file  = ESLintRails::Engine.root.join(CONFIG_FILES[0])
+      @default_file  = ESLintRails::Engine.root.join('config/eslint.json')
     end
 
+    # Reads the config file's content and returns a hash of the settings
     def read
       content = config_file.read
       @config = parse_content(content, config_file.extname)
@@ -41,7 +42,7 @@ module ESLintRails
       Rails.root.join(file) if file
     end
 
-    # parses content based on fiel extension
+    # parses content based on file extension
     def parse_content(content, extname)
       case extname
       when '.js'
