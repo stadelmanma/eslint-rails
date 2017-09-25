@@ -8,6 +8,7 @@ module ESLintRails
 
     def initialize(file)
       @file = normalize_infile(file)
+      @config = Config.read
     end
 
     def run
@@ -52,7 +53,7 @@ module ESLintRails
     end
 
     def plugins
-      JSON.parse(Config.read)['plugins'] || []
+      @config['plugins'] || []
     end
 
     def warning_hashes(file_content)
@@ -61,7 +62,7 @@ module ESLintRails
           window = this;
           #{eslint_js};
           #{eslint_plugin_js};
-          return eslint.verify('#{escape_javascript(file_content)}', #{Config.read});
+          return eslint.verify('#{escape_javascript(file_content)}', #{@config.to_json});
         }()
       JS
     end

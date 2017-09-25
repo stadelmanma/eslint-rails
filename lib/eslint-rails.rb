@@ -1,4 +1,5 @@
 require 'execjs'
+require 'yaml'
 
 require 'eslint-rails/config'
 require 'eslint-rails/engine'
