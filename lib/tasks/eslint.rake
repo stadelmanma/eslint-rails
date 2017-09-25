@@ -28,6 +28,7 @@ namespace :eslint do
 
   desc 'Print the current configuration file (Uses local config/eslint.json if it exists; uses default config/eslint.json if it does not; optionally force default by passing a parameter)'
   task :print_config, [:force_default] => :environment do |_, args|
-    puts ESLintRails::Config.read(force_default: args[:force_default])
+    config = ESLintRails::Config.read(force_default: args[:force_default])
+    puts JSON.pretty_generate(config)
   end
 end
