@@ -11,7 +11,8 @@ class EslintController < ActionController::Base
   end
 
   def config_file
-    render json: ESLintRails::Config.read(force_default: params[:force_default])
+    config = ESLintRails::Config.read(force_default: params[:force_default])
+    render json: JSON.pretty_generate(config)
   end
 
   private
