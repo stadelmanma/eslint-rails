@@ -38,7 +38,7 @@ module ESLintRails
 
     # locates a config file based on expected set of paths
     def find_custom_config
-      file = CONFIG_PATH.detect { |f| Rails.root.join(f).exist? }
+      file = CONFIG_FILES.detect { |f| Rails.root.join(f).exist? }
       Rails.root.join(file) if file
     end
 
